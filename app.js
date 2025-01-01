@@ -3,7 +3,8 @@ const app = express();
 const cors = require('cors');
 const userController = require('./controller/user_controller');
 const customerController = require('./controller/customer_controller');
-const orderController = require('./controller/order.controller')
+const orderController = require('./controller/order_controller')
+const itemController = require('./controller/item_controller')
 
 app.use(cors());
 
@@ -22,8 +23,8 @@ app.get('/users',(req,res) => {
     })
 })
 
-app.post('/createUser', (req,res) => {
-    userController.saveUsers(req.body,(callback) => {
+app.post('/signing', (req,res) => {
+    userController.signing(req.body,(callback) => {
         res.send();
     });
 });
@@ -65,5 +66,12 @@ app.get('/orders', orderController.getOrder);
 app.delete('/deleteOrder', (req, res) => {
     orderController.deleteOrder(req, res);
 });
+
+//Item routes
+app.post('/saveItem',(req ,res)=>{
+    itemController.saveItem(req,res)
+});
+
+app.get('/items', itemController.getItem);
 
 module.exports = app;

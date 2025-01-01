@@ -1,6 +1,6 @@
 const User = require('../model/user');
 
-const saveUser = async (req, res, next) => {
+const signing = async (req, res) => {
     try {
         const lastUser = await User.findOne({}, {}, { sort: { id: -1 } });
         let newId = "U001";
@@ -19,13 +19,21 @@ const saveUser = async (req, res, next) => {
         });
 
         const response = await newUser.save();
-        res.status(201).json({ response });
+        res.status(200).json({ response });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
 
-const getUser = async (req, res, next) => {
+const signup = async(req,res) =>{
+    try {
+
+    }catch (error){
+        res.status(500).json({ error: error.message })
+    }
+}
+
+const getUser = async (req, res) => {
     try {
         const response = await User.find();
         res.json({ response });
@@ -34,7 +42,7 @@ const getUser = async (req, res, next) => {
     }
 };
 
-const updateUser = async (req, res, next) => {
+const updateUser = async (req, res) => {
     try {
         const { id, name, email, contact } = req.body;
 
@@ -49,7 +57,7 @@ const updateUser = async (req, res, next) => {
     }
 };
 
-const deleteUser = async (req, res, next) => {
+const deleteUser = async (req, res) => {
     try {
         const { id } = req.body;
 
@@ -61,6 +69,6 @@ const deleteUser = async (req, res, next) => {
 };
 
 exports.getUsers = getUser;
-exports.saveUsers = saveUser;
+exports.signing = signing;
 exports.updateUsers = updateUser;
 exports.deleteUsers = deleteUser;

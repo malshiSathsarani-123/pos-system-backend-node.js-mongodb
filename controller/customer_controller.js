@@ -19,7 +19,7 @@ const saveCustomer = async (req, res, next) => {
         });
 
         const response = await newCustomer.save();
-        res.status(201).json({ message: "Customer saved successfully." });
+        res.status(200).json({ message: `${newId} Customer saved successfully.` });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -43,7 +43,7 @@ const updateCustomer = async (req, res, next) => {
             { $set: { name: name, email: email, contact: contact } }
         );
 
-        res.json({ message: "Customer updated successfully." });
+        res.json({ message: `${id} Customer updated successfully.` });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -52,9 +52,8 @@ const updateCustomer = async (req, res, next) => {
 const deleteCustomer = async (req, res, next) => {
     try {
         const { id } = req.body;
-
         const response = await Customer.deleteOne({ id: id });
-        res.json({ message: "Customer deleted successfully." });
+        res.json({ message: `${id} Customer deleted successfully.` });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
